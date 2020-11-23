@@ -1,0 +1,80 @@
+<div class="auth-wrapper d-flex no-block justify-content-center align-items-center">
+    <div class="auth-box">
+        <div>
+
+            <div class="logo">
+                <span class="db"><img src="/assets/images/dalipalilogo.png" alt="dalipali" /></span>
+                <span class="db"><img src="/assets/images/dalipalitext.png" alt="dalipali" style="margin-left: -12px;
+    margin-top: 7px;" /></span>
+                <h5 class="font-medium m-b-5 m-t-10">Sign Up</h5>
+            </div>
+            <!-- Form -->
+            {{#if error_msg}}
+                            <div class="alert alert-danger alert-dismissible fade show m-2" role="alert">
+                                <strong>{{error_msg}}</strong>
+                                <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+                                    <span aria-hidden="true">&times;</span>
+                                </button>
+                            </div>
+                            {{/if}}
+            <div class="row">
+                <div class="col-12">
+                    <form class="form-horizontal m-t-20" action="/register" method="post">
+                        <div class="form-group row ">
+                            <div class="col-12 ">
+                                <div class="controls">
+                                    <input class="form-control form-control-lg"  minlength="5" type="text" name="fullname"
+                                        id="fullname" placeholder="Name" required data-validation-required-message="Please enter your Fullname">
+                                    <p class="help-block"></p>
+                                </div>
+
+                            </div>
+                        </div>
+                        <div class="form-group row">
+                            <div class="col-12 ">
+                                <input class="form-control form-control-lg" type="email" name="email" id="email"
+                                    placeholder="Email" required data-validation-required-message="Please enter your Email ">
+                                <p class="help-block"></p>
+                            </div>
+                        </div>
+                        <div class="form-group row">
+                            <div class="col-12 ">
+                                <input class="form-control form-control-lg"  minlength="6" type="password" name="password" required id="password"
+                                    placeholder="Password" autocomplete="false" data-validation-required-message="Please enter your password">
+                                    <p class="help-block"></p>
+                            </div>
+                        </div>
+                        {{!-- <div class="form-group row">
+                            <div class="col-md-12 ">
+                                <input class="form-control form-control-lg" type="password" name="repassword"
+                                    data-validation-matches-match="password"
+                                   data-validation-matches-message="Must match password  entered above"
+                                    placeholder="Confirm Password" required>
+                                    <p class="help-block"></p>
+                            </div>
+                        </div>
+                        <div class="form-group row">
+                            <div class="col-md-12 ">
+                                <div class="custom-control custom-checkbox">
+                                    <input type="checkbox" class="custom-control-input" id="customCheck1">
+                                    <label class="custom-control-label" for="customCheck1">I agree to all <a
+                                            href="javascript:void(0)">Terms</a></label>
+                                </div>
+                            </div>
+                        </div> --}}
+                        <div class="form-group text-center ">
+                            <div class="col-xs-12 p-b-20 ">
+                                <button class="btn btn-block btn-lg btn-info " type="submit ">SIGN UP</button>
+                            </div>
+                        </div>
+                        <div class="form-group m-b-0 m-t-10 ">
+                            <div class="col-sm-12 text-center ">
+                                Already have an account? <a href="/login" class="text-info m-l-5 "><b>Sign In</b></a>
+                            </div>
+                        </div>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>

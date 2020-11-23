@@ -1,0 +1,876 @@
+<!DOCTYPE html>
+<html dir="ltr" lang="en">
+
+<head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <!-- Tell the browser to be responsive to screen width -->
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta name="description" content="">
+    <meta name="author" content="">
+    <!-- Favicon icon -->
+    <link rel="icon" type="image/png" sizes="16x16" href="/assets/images/dalipalilogo.png">
+    <title>Dalipali - Shopping all Grocery</title>
+    <!-- This Page CSS -->
+    <link href="/assets/libs/magnific-popup/dist/magnific-popup.css" rel="stylesheet">
+    <!-- Custom CSS -->
+    <link href="/dist/css/style.min.css" rel="stylesheet">
+    <link href="/dist/css/slider.css" rel="stylesheet">
+    <link href=" /assets/extra-libs/toastr/dist/build/toastr.min.css" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/slick-carousel/1.9.0/slick.min.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/slick-carousel/1.9.0/slick-theme.min.css">
+    <style>
+        body {
+            overflow-x: hidden;
+        }
+
+        .checked {
+            color: orange;
+        }
+
+        .font-sizes {
+            font-size: 20px;
+        }
+        .bg-info{
+            background-color: #095c91 !important;
+        }
+        #content {
+            width: 100%;
+        }
+
+        #main-wrapper[data-layout=horizontal] .topbar {
+            position: fixed;
+            width: 100%;
+        }
+
+        #main-wrapper[data-layout=horizontal] .left-sidebar {
+            padding-top: 64px;
+            position: fixed;
+        }
+
+        #main-wrapper[data-layout=horizontal] .left-sidebar[data-sidebarbg=skin5] {
+            background-color: #095c91 !important;
+        }
+
+        #main-wrapper[data-layout=horizontal] .left-sidebar[data-sidebarbg=skin5] ul {
+            background-color: inherit;
+        }
+
+        .auth-wrapper {
+            min-height: auto;
+        }
+
+        .auth-wrapper .auth-box {
+            margin: 1% 0px !important;
+            max-width: 720px;
+        }
+
+        .slider {
+            max-width: 1260px;
+            margin: 0 auto;
+        }
+
+        .slick-slide {
+            margin: 0 5px;
+        }
+
+        .slick-list {
+            margin: 0px -5px 0px -5px;
+        }
+
+        .logo {
+            margin-left: -9px;
+        }
+
+        hr {
+            margin-top: 5px !important;
+        }
+
+        .marginOwn {
+            margin-left: 5rem;
+        }
+
+        .carousel-control-prev-icon {
+            margin-left: -19px;
+        }
+
+        .carousel-control-next-icon {
+            margin-right: -22px;
+        }
+
+        .carousel-control-prev-icon,
+        .carousel-control-next-icon {
+            height: 100px;
+            width: 100px;
+            outline: black;
+            background-size: 100%, 100%;
+            border-radius: 50%;
+            background-image: none;
+        }
+
+        .carousel-control-next-icon:after {
+            content: '>';
+            font-size: 55px;
+            color: red;
+        }
+
+        .carousel-control-prev-icon:after {
+            content: '<';
+            font-size: 55px;
+            color: red;
+        }
+
+
+
+        .page-titles {
+            font: 500;
+        }
+
+        .moreView:hover {
+            text-decoration: underline;
+        }
+
+        .containerBox {
+            border: solid 0.5px gainsboro;
+
+        }
+
+        .rounded {
+            width: 70px;
+            height: 70px;
+            position: absolute;
+        }
+
+        .centerIcon {
+            position: relative;
+            top: 35%;
+            left: 35%;
+            color: #095c91
+        }
+
+        .listView {
+            margin-bottom: 10px;
+            font-size: 12px;
+            color: gray;
+        }
+
+        .footerHeader {
+            margin-left: 20%;
+        }
+
+        .footerCricle {
+            background-color: lightgrey;
+            width: 30px !important;
+            height: 28px !important;
+            cursor: pointer;
+        }
+
+        .footerIcons {
+            color: whitesmoke;
+            position: relative;
+            margin-left: 7px;
+            top: 3px;
+        }
+
+        .iconFacebook:hover {
+            color: #385898
+        }
+
+        .iconGoogle:hover {
+            color: red;
+        }
+
+        .iconWhatsapp:hover {
+            color: limegreen;
+        }
+
+        .aboutusIcon {
+            font-size: 40px;
+            color: #095c91;
+        }
+
+        .textleft {
+            width: 100%;
+            text-align: left;
+
+        }
+
+        .btnDropdown {
+            text-decoration: none !important;
+            color: #f05d4d;
+            padding: 7px 0;
+        }
+
+        .btnDropdown:hover {
+            text-decoration: none !important;
+            color: #f05d4d;
+        }
+
+        .productBg {
+            background-color: white !important;
+            color: #095c91;
+            cursor: pointer;
+        }
+
+        .productHeading {
+            margin: 7px 17px 7px 0px;
+        }
+
+        .btnColor {
+            background-color: #233242 !important;
+            font-weight: 100;
+            font-size: 13px;
+        }
+
+        .groupItem {
+            color: #6a7a8c;
+        }
+
+        .groupItem:hover {
+            background-color: #f2f4f5;
+            color: #6a7a8c
+        }
+
+        .groupItem.active {
+            background-color: #f2f4f5 !important;
+            color: #6a7a8c;
+            border-color: inherit;
+
+        }
+
+        .formControl {
+            display: inherit;
+            width: 50%;
+        }
+
+        .innerImage {
+            overflow: hidden;
+        }
+
+        .card-item-image {
+            transition-duration: .4s;
+        }
+
+        .card-item-image:hover {
+            overflow: hidden;
+            transform: scale(1.1);
+        }
+
+        /*this part of more details pages */
+        .cardOwn {
+            border-radius: 12px;
+            padding-top: 25px;
+            padding: 32px;
+            background-color: white;
+        }
+
+        .cardHeight {
+            height: 30rem;
+        }
+
+        .borderRadius {
+            border-radius: 2px;
+        }
+
+        .cartShortDescription {
+            padding: 20px;
+        }
+
+        /* end*/
+        .card-item-title {
+            margin-bottom: 0px !important;
+        }
+
+        .cardIcons {
+            color: #9c9c9c;
+            font-size: 12px;
+        }
+
+        .btn-red {
+            background-color: #fa5838;
+        }
+
+        .btn-red:hover {
+            background-color: #f55847;
+        }
+
+        /*------------ProfileEdit---------*/
+        input[type="file"]::-webkit-file-upload-button {
+            cursor: pointer;
+        }
+
+        .custom-file-upload input[type="file"] {
+            -webkit-appearance: none;
+
+            position: absolute;
+            top: 0;
+            left: 0;
+            opacity: 0;
+            cursor: pointer;
+        }
+
+        .custom-file-upload {
+            position: relative;
+            display: inline-block;
+            border-radius: 2px;
+            border: #ebebeb solid 1px;
+            width: 115px;
+            padding: 4px 6px 4px 8px;
+            font-size: 13px;
+            color: #7f7f7f;
+            margin-top: 2px;
+            background: white;
+            cursor: pointer;
+
+        }
+
+        .containerProfile {
+            position: relative;
+
+        }
+
+        .image {
+            cursor: pointer;
+            display: block;
+            transition: .5s ease;
+            backface-visibility: hidden;
+            background: black;
+        }
+
+        .btnOwn {
+            background-color: #fa5838 !important;
+            border: none !important;
+        }
+
+        .btnOwn:visited {
+            border: none;
+        }
+
+        .btn:focus,
+            {
+            box-shadow: none;
+        }
+
+        .btnProfile {
+            transition: .5s ease;
+            opacity: 0;
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            -ms-transform: translate(-50%, -50%);
+            text-align: center;
+        }
+
+        .containerProfile:hover .image {
+            filter: blur(2px);
+        }
+
+        .containerProfile:hover .btnProfile {
+            background-color: #fa5838 !important;
+            opacity: 1;
+        }
+
+        .commentBox {
+            display: flex;
+            align-items: flex-start;
+        }
+
+        .commentBody {
+            flex: 1;
+        }
+
+        .colors {
+            border-color: #095c91 !important;
+            color: gray;
+        }
+    </style>
+</head>
+
+<body>
+    <!-- ============================================================== -->
+    <!-- Preloader - style you can find in spinners.css -->
+    <!-- ============================================================== -->
+    <div class="preloader">
+        <div class="lds-ripple">
+            <div class="lds-pos"></div>
+            <div class="lds-pos"></div>
+        </div>
+    </div>
+    <!-- ============================================================== -->
+    <!-- Main wrapper - style you can find in pages.scss -->
+    <!-- ============================================================== -->
+    <div id="main-wrapper">
+        <!-- ============================================================== -->
+        <!-- Topbar header - style you can find in pages.scss -->
+        <!-- ============================================================== -->
+        <div style="margin-bottom:7rem">
+            <header class="topbar">
+                <nav class="navbar top-navbar navbar-expand-md navbar-dark">
+                    <div class="navbar-header">
+                        <!-- This is for the sidebar toggle which is visible on mobile only -->
+                        <a class="nav-toggler waves-effect waves-light d-block d-md-none" href="javascript:void(0)">
+                            <i class="ti-menu ti-close"></i>
+                        </a>
+                        <!-- ============================================================== -->
+                        <!-- Logo -->
+                        <!-- ============================================================== -->
+                        <div class="navbar-brand">
+                            <a href="/homepage" class="logo">
+                                <!-- Logo icon -->
+                                <b class="logo-icon">
+                                    <!--You can put here icon as well // <i class="wi wi-sunset"></i> //-->
+                                    <!-- Dark Logo icon -->
+                                    <img src="/assets/images/dalipalilogo.png" alt="homepage" class="dark-logo" />
+                                    <!-- Light Logo icon -->
+                                    {{!-- <img src="/assets/images/dalipalilogo.png" alt="homepage" class="light-logo" /> --}}
+                                </b>
+                                <!--End Logo icon -->
+                                <!-- Logo text -->
+                                <span class="logo-text">
+                                    <!-- dark Logo text -->
+                                    <img src="/assets/images/dalipalitext.png" alt="homepage" class="dark-logo" style="margin-left: -10px;
+    margin-top: 4px;
+    height: 11px;">
+                                    <!-- Light Logo text -->
+                                    {{!-- <img src="/assets/images/dalipalilogo.png" class="light-logo" alt="homepage" /> --}}
+                                </span>
+                            </a>
+                        </div>
+                        <!-- ============================================================== -->
+                        <!-- End Logo -->
+                        <!-- ============================================================== -->
+                        <!-- ============================================================== -->
+                        <!-- Toggle which is visible on mobile only -->
+                        <!-- ============================================================== -->
+                        <a class="topbartoggler d-block d-md-none waves-effect waves-light" href="javascript:void(0)"
+                            data-toggle="collapse" data-target="#navbarSupportedContent"
+                            aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+                            <i class="ti-more"></i>
+                        </a>
+                    </div>
+                    <!-- ============================================================== -->
+                    <!-- End Logo -->
+                    <!-- ============================================================== -->
+                    <div class="navbar-collapse collapse" id="navbarSupportedContent">
+                        <!-- ============================================================== -->
+                        <!-- toggle and nav items -->
+                        <!-- ============================================================== -->
+                        <ul class="navbar-nav float-left mr-auto">
+                            <!-- <li class="nav-item d-none d-md-block">
+                            <a class="nav-link sidebartoggler waves-effect waves-light" href="javascript:void(0)" data-sidebartype="mini-sidebar">
+                                <i class="mdi mdi-menu font-24"></i>
+                            </a>
+                        </li> -->
+                            <!-- ============================================================== -->
+                            <!-- Search -->
+                            <!-- ============================================================== -->
+                            <li class="nav-item search-box">
+                                <a class="nav-link waves-effect waves-dark" href="javascript:void(0)">
+                                    <div class="d-flex align-items-center">
+                                        <i class="mdi mdi-magnify font-20 mr-1"></i>
+                                        <div class="ml-1 d-none d-sm-block">
+                                            <span>Search</span>
+                                        </div>
+                                    </div>
+                                </a>
+                                <form class="app-search position-absolute">
+                                    <input type="text" class="form-control" placeholder="Search &amp; enter">
+                                    <a class="srh-btn">
+                                        <i class="ti-close"></i>
+                                    </a>
+                                </form>
+                            </li>
+                        </ul>
+                        <!-- ============================================================== -->
+                        <!-- Right side toggle and nav items -->
+                        <!-- ============================================================== -->
+                        <ul class="navbar-nav float-right">
+                            <!-- ============================================================== -->
+                            <li class="nav-item dropdown">
+                                <a class="nav-link dropdown-toggle waves-effect waves-dark" href="" id="2"
+                                    data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                                    <i class="font-22 mdi mdi-email-outline"></i>
+
+                                </a>
+                                <div class="dropdown-menu dropdown-menu-right mailbox animated bounceInDown"
+                                    aria-labelledby="2">
+                                    <span class="with-arrow">
+                                        <span class="bg-danger"></span>
+                                    </span>
+                                    <ul class="list-style-none">
+                                        <li>
+                                            <div class="drop-title text-white bg-danger">
+                                                <h4 class="m-b-0 m-t-5">5 New</h4>
+                                                <span class="font-light">Messages</span>
+                                            </div>
+                                        </li>
+                                        <li>
+                                            <div class="message-center message-body">
+                                                <!-- Message -->
+                                                <a href="javascript:void(0)" class="message-item">
+                                                    <span class="user-img">
+                                                        <img src="../../assets/images/users/1.jpg" alt="user"
+                                                            class="rounded-circle">
+                                                        <span class="profile-status online pull-right"></span>
+                                                    </span>
+                                                    <div class="mail-contnet">
+                                                        <h5 class="message-title">Pavan kumar</h5>
+                                                        <span class="mail-desc">Just see the my admin!</span>
+                                                        <span class="time">9:30 AM</span>
+                                                    </div>
+                                                </a>
+                                                <!-- Message -->
+                                                <a href="javascript:void(0)" class="message-item">
+                                                    <span class="user-img">
+                                                        <img src="../../assets/images/users/2.jpg" alt="user"
+                                                            class="rounded-circle">
+                                                        <span class="profile-status busy pull-right"></span>
+                                                    </span>
+                                                    <div class="mail-contnet">
+                                                        <h5 class="message-title">Sonu Nigam</h5>
+                                                        <span class="mail-desc">I've sung a song! See you at</span>
+                                                        <span class="time">9:10 AM</span>
+                                                    </div>
+                                                </a>
+                                                <!-- Message -->
+                                                <a href="javascript:void(0)" class="message-item">
+                                                    <span class="user-img">
+                                                        <img src="/assets/images/users/3.jpg" alt="user"
+                                                            class="rounded-circle">
+                                                        <span class="profile-status away pull-right"></span>
+                                                    </span>
+                                                    <div class="mail-contnet">
+                                                        <h5 class="message-title">Arijit Sinh</h5>
+                                                        <span class="mail-desc">I am a singer!</span>
+                                                        <span class="time">9:08 AM</span>
+                                                    </div>
+                                                </a>
+                                                <!-- Message -->
+                                                <a href="javascript:void(0)" class="message-item">
+                                                    <span class="user-img">
+                                                        <img src="../../assets/images/users/4.jpg" alt="user"
+                                                            class="rounded-circle">
+                                                        <span class="profile-status offline pull-right"></span>
+                                                    </span>
+                                                    <div class="mail-contnet">
+                                                        <h5 class="message-title">Pavan kumar</h5>
+                                                        <span class="mail-desc">Just see the my admin!</span>
+                                                        <span class="time">9:02 AM</span>
+                                                    </div>
+                                                </a>
+                                            </div>
+                                        </li>
+                                        <li>
+                                            <a class="nav-link text-center link text-dark" href="javascript:void(0);">
+                                                <b>See all e-Mails</b>
+                                                <i class="fa fa-angle-right"></i>
+                                            </a>
+                                        </li>
+                                    </ul>
+                                </div>
+                            </li>
+                            <!-- ============================================================== -->
+                            <!-- End Messages -->
+                            <!-- ============================================================== -->
+                            <!-- ============================================================== -->
+                            <!-- Comment -->
+                            <!-- ============================================================== -->
+                            <li class="nav-item dropdown border-right">
+                                <a class="nav-link  waves-effect waves-dark" href="/cart-view">
+                                    <i class="mdi mdi-cart-outline font-22"></i>
+                                    <span class="badge badge-pill badge-danger noti">{{session.cart.totalQty}}</span>
+                                </a>
+                            </li>
+                            <!-- ============================================================== -->
+                            <!-- End Comment -->
+                            <!-- ============================================================== -->
+                            <!-- ============================================================== -->
+                            <!-- User profile -->
+                            {{#if user_id}}
+                            <li class="nav-item dropdown">
+                                <a class="nav-link dropdown-toggle waves-effect waves-dark pro-pic" href=""
+                                    data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                                    {{#if session.passport.user.image}}
+                                    <img src="/userPic/{{session.passport.user.image}}" alt="user"
+                                        class="rounded-circle" width="40">
+                                    {{else}}
+                                    <img src="/assets/images/users/2.jpg" alt="user" class="rounded-circle" width="40">
+                                    {{/if}}
+                                    <span
+                                        class="m-l-5 font-medium d-none d-sm-inline-block">{{session.passport.user.userName}}
+                                        <i class="mdi mdi-chevron-down"></i></span>
+                                </a>
+                                <div class="dropdown-menu dropdown-menu-right user-dd animated flipInY">
+                                    <span class="with-arrow">
+                                        <span class="bg-primary"></span>
+                                    </span>
+                                    <div class="d-flex no-block align-items-center p-15 bg-primary text-white m-b-10">
+                                        <div class="">
+                                            {{#if session.passport.user.image}}
+                                            <img src="/userPic/{{session.passport.user.image}}" alt="user"
+                                                class="rounded-circle" width="60">
+                                            {{else}}
+                                            <img src="/assets/images/users/2.jpg" alt="user" class="rounded-circle"
+                                                width="60">
+                                            {{/if}}
+                                        </div>
+                                        <div class="m-l-10">
+                                            <h4 class="m-b-0">{{session.passport.user.userName}}</h4>
+                                            <p class=" m-b-0">{{session.passport.user.email}}</p>
+                                        </div>
+                                    </div>
+                                    <a class="dropdown-item" href="/profile">
+                                        <i class="ti-user m-r-5 m-l-5"></i> My Profile</a>
+                                    <a class="dropdown-item" href="/wishlist">
+                                        <i class="ti-wallet m-r-5 m-l-5"></i>WishList</a>
+                                    <a class="dropdown-item" href="javascript:void(0)">
+                                        <i class="ti-email m-r-5 m-l-5"></i> Inbox</a>
+                                    <div class="dropdown-divider"></div>
+                                    <a class="dropdown-item" href="javascript:void(0)">
+                                        <i class="ti-settings m-r-5 m-l-5"></i> Account Setting</a>
+                                    <div class="dropdown-divider"></div>
+                                    <a class="dropdown-item" href="/logout">
+                                        <i class="fa fa-power-off m-r-5 m-l-5"></i> Logout</a>
+                                    <div class="dropdown-divider"></div>
+                                    <div class="p-l-30 p-10">
+                                        <a href="javascript:void(0)" class="btn btn-sm btn-success btn-rounded">View
+                                            Profile</a>
+                                    </div>
+                                </div>
+                            </li>
+                            {{else}}
+                            <div class="navbar-brand ">
+                                <a class="nav-link  waves-effect waves-dark pro-pic" href="/login"> <i
+                                        class="fas fa-user d-inline-block" style="margin-top:9px;"></i><span
+                                        class="mx-2">Login/Register</span>
+                                </a>
+                            </div>
+
+                            {{/if}}
+                            <!-- ============================================================== -->
+                            <!-- User profile and search -->
+                            <!-- ============================================================== -->
+                        </ul>
+                    </div>
+                </nav>
+            </header>
+            <aside class="left-sidebar">
+                <!-- Sidebar scroll-->
+                <div class="scroll-sidebar">
+                    <!-- Sidebar navigation-->
+                    <nav class="sidebar-nav">
+                        <ul id="sidebarnav">
+                            <li class="sidebar-item"> <a class="sidebar-link " href="#"><i
+                                        class="mdi mdi-store "></i><span class="hide-menu">Dalipali Store</span></a>
+                            </li>
+
+                            <li class="sidebar-item"> <a class="sidebar-link" href="/homepage"><i
+                                        class="mdi mdi-home"></i><span class="hide-menu">Home </span></a>
+                            </li>
+                            <li class="sidebar-item"> <a class="sidebar-link" href="/allProduct"
+                                    aria-expanded="false"><i class="mdi mdi-collage"></i><span
+                                        class="hide-menu">Shop</span></a>
+
+                            </li>
+                            <li class="sidebar-item"> <a class="sidebar-link" href="/aboutUs" aria-expanded="false"><i
+                                        class="mdi mdi-widgets"></i><span class="hide-menu">About Us
+                                    </span></a>
+                            </li>
+                            <li class="sidebar-item"> <a class="sidebar-link" href="/contactUs" aria-expanded="false"><i
+                                        class="mdi mdi-deskphone"></i><span class="hide-menu">Contect Us
+                                    </span></a>
+                            </li>
+
+                        </ul>
+                    </nav>
+                    <!-- End Sidebar navigation -->
+                </div>
+                <!-- End Sidebar scroll-->
+            </aside>
+        </div>
+
+        <div>
+            {{{body}}}
+        </div>
+
+    </div>
+    <hr>
+
+    <div class="page-wrapper" style="margin:3% 6%; width:100%; background-color:white;">
+        <div class="page-breadcrumb">
+            <div class="row">
+                <div class="col-md-4">
+
+                    <div class="border rounded rounded-circle ">
+                        <i class="fas fa-truck centerIcon " style="font-size: 18px; "></i>
+                    </div>
+                    <div class="marginOwn py-4"> <span style="font-weight:100;">Free & Next Day Delivery</span>
+                    </div>
+
+                </div>
+                <div class="col-md-4">
+                    <div class="border rounded rounded-circle ">
+                        <i class="fas fa-shopping-basket centerIcon " style="font-size: 18px; "></i>
+                    </div>
+                    <div class="marginOwn py-4"> <span style="font-weight:100;">100% Satisfaction Guarante</span>
+                    </div>
+                </div>
+                <div class="col-md-4">
+                    <div class="border rounded rounded-circle ">
+                        <i class="mdi mdi-tag-heart centerIcon " style="font-size: 18px; "></i>
+                    </div>
+                    <div class="marginOwn py-4"> <span style="font-weight:100;">Great Daily Deals Discount</span>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <hr>
+    <div class="page-wapper" style="width:110%; margin: 0% 5%">
+        <div class="page-breadcrumb">
+            <div class="row">
+                <div class="col-md-2" style="margin-top: -1%;">
+                    <a href="index.html" class="logo">
+                        <!-- Logo icon -->
+                        <b class="logo-icon">
+                            <img src="/assets/images/dalipalilogo.png" alt="homepage" class="dark-logo" />
+                        </b>
+                        <span class="logo-text">
+                            <img src="/assets/images/dalipalitext.png" alt="homepage" class="dark-logo"
+                                style="margin-left: -2px;margin-top: 4px;height: 11px;">
+                        </span>
+                    </a>
+                    <ul style="list-style: none;" class="ml-n4">
+                        <div class="ml-n3">
+                            <li class="listView"><i class="mdi mdi-phone"></i>
+                                <span>+9779867255019</span>
+                            </li>
+                            <li class="listView"><i class="mdi mdi-email"></i>
+                                <span>dalipali@gmail.com</span>
+                            </li>
+                            <li class="listView"><i class="mdi mdi-web"></i>
+                                <span>dalipali.com</span>
+                            </li>
+                            <li class="listView"><i class="mdi mdi-phone"></i>
+                                <span>+9779867255019</span>
+                            </li>
+                        </div>
+
+                    </ul>
+                </div>
+
+                <div class="col-md-2">
+
+                    <h6 class="footerHeader">TOP CITIES</h6>
+                    <ul style="list-style: none;">
+                        <li class="listView">Butwal</li>
+                        <li class="listView">Kalinager</li>
+                        <li class="listView">DriverTol</li>
+                        <li class="listView">Mangiram</li>
+
+                    </ul>
+                </div>
+                <div class="col-md-2">
+                    <h6 class="footerHeader">CATEGORIES</h6>
+                    <ul style="list-style: none;">
+                        <li class="listView">Vegetable</li>
+                        <li class="listView">Grocery & Staples</li>
+                        <li class="listView">Breakfast & Dairy</li>
+                        <li class="listView">Soft Drinks</li>
+                        <li class="listView">Biscuits & Cookies</li>
+                    </ul>
+
+                </div>
+                <div class="col-md-2">
+                    <h6 class="footerHeader">ABOUT US</h6>
+                    <ul style="list-style: none;">
+                        <li class="listView">Information</li>
+                        <li class="listView">Careers</li>
+                        <li class="listView">Store Location</li>
+                        <li class="listView">Affillate Program</li>
+                        <li class="listView">Copyright</li>
+                    </ul>
+                </div>
+
+                <div class="col-md-2">
+                    <h6 class="footerHeader">DOWNLOAD APP</h6>
+                    <ul style="list-style: none;">
+                        <li class="listView">Information</li>
+                    </ul>
+                    <h6>GET IN TOUCH</h6>
+                    <div class="d-inline-block mx-1">
+                        <div class="footerCricle rounded-circle"><span
+                                class="mdi mdi-facebook footerIcons iconFacebook"></span></div>
+                    </div>
+
+                    <div class="d-inline-block mx-1">
+                        <div class="footerCricle rounded-circle"><span
+                                class="mdi mdi-facebook-messenger footerIcons iconFacebook"
+                                style="margin-left:8px; font-size:15px;"></span></div>
+                    </div>
+                    <div class="d-inline-block mx-1">
+                        <div class="footerCricle rounded-circle"><span
+                                class="fab fa-google footerIcons iconGoogle"></span></div>
+                    </div>
+                    <div class="d-inline-block mx-1">
+                        <div class="footerCricle rounded-circle"><span class="mdi mdi-whatsapp footerIcons iconWhatsapp"
+                                style="margin-left:8px; font-size:15px;"></span></div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+    </div>
+
+    {{{body}}}
+ 
+    <script src="/assets/libs/jquery/dist/jquery.min.js"></script>
+    <!-- Bootstrap tether Core JavaScript -->
+    <script src="/assets/libs/popper.js/dist/umd/popper.min.js"></script>
+    <script src="/assets/libs/bootstrap/dist/js/bootstrap.min.js"></script>
+    <!-- apps -->
+    <script src="/dist/js/app.min.js"></script>
+    <script src="/dist/js/app.init.horizontal.js"></script>
+    <script src="/dist/js/app-style-switcher.horizontal.js"></script>
+    <!-- slimscrollbar scrollbar JavaScript -->
+    <script src="/assets/libs/perfect-scrollbar/dist/perfect-scrollbar.jquery.min.js"></script>
+    <script src="/assets/extra-libs/sparkline/sparkline.js"></script>
+    <!--Wave Effects -->
+    <script src="/dist/js/waves.js"></script>
+    <!--Menu sidebar -->
+    <script src="/dist/js/sidebarmenu.js"></script>
+    <!--Custom JavaScript -->
+    <script src="/assets/libs/sweetalert2/dist/sweetalert2.all.min.js"></script>
+    <script src="/assets/libs/sweetalert2/sweet-alert.init.js"></script>
+    <script src="/dist/js/custom.min.js"></script>
+    {{!--  --}}
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/slick-carousel/1.9.0/slick.min.js"></script>
+    <script src="/assets/extra-libs/jqbootstrapvalidation/validation.js"></script>
+    <script src="/assets/extra-libs/toastr/toastr-init.js"></script>
+    <script src="/assets/extra-libs/toastr/dist/build/toastr.min.js"></script>
+
+    <script>
+        $(function () { $(".validated").jqBootstrapValidation(); });
+    </script>
+    <script>
+        $(function () { $("input,select,textarea").not("[type=submit]").jqBootstrapValidation(); });
+
+    </script>
+    <script>
+        $('[data-toggle="tooltip"]').tooltip();
+        $(".preloader").fadeOut();
+        // ============================================================== 
+        // Login and Recover Password 
+        // ============================================================== 
+        $('#to-recover').on("click", function () {
+            $("#loginform").slideUp();
+            $("#recoverform").fadeIn();
+        });
+    </script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/socket.io/2.3.1/socket.io.js"></script>
+    <script src="/dist/js/ownCustom.js"></script>
+</body>
+
+</html>
