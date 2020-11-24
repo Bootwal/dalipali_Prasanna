@@ -2,45 +2,38 @@ require("dotenv").config();
 
 const express = require("express");
 const app = express();
+const path = require("path");
 const exphbs = require("express-handlebars");
 const webRoutes = require("./routes/web");
-
 const db = require("./database/connection");
 const session = require("express-session");
 const flash = require("connect-flash");
 const bodyparser = require("body-parser");
-const MySQLStore = require("express-mysql-session")(session);
+// const MySQLStore = require("express-mysql-session")(session); // doesn't work with sequelize
+// const SessionStore = require("express-session-sequelize")(session.Store);
+const SequelizeStore = require("connect-session-sequelize")(session.Store);
 
 //setting up templating engine
 app.set("view engine", "hbs");
 app.engine("hbs", exphbs({ defaultLayout: "mainLayout.hbs" }));
 
-app.use(express.static("public"));
+app.use(express.static(path.join(__dirname + "/public")));
 
 app.use(bodyparser.urlencoded({ extended: true }));
 
 //setting up session store
-const sessionStore = new MySQLStore(
-  {
-    expiration: 10000000,
-    createDatabaseTable: true,
-    schema: {
-      tableName: "users_sessions",
-      columnNames: {
-        session_id: "session_id",
-        expires: "expires",
-        data: "data",
-      },
-    },
-  },
-  db
-);
+var myStore = new SequelizeStore({
+  db: db,
+  checkExpirationInterval: 15 * 60 * 1000,
+  expiration: 12 * 60 * 60 * 1000,
+});
 
 //setup session and flash
 app.use(
   session({
-    secret: process.env.COOKIE_SECRET,
-    store: sessionStore,
+    key: "session_cookie_name",
+    secret: "thisissecret",
+
     saveUninitialized: true,
     resave: true,
     rolling: true,
