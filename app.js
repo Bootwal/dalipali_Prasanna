@@ -8,6 +8,7 @@ const webRoutes = require("./routes/web");
 const db = require("./database/connection");
 const session = require("express-session");
 const flash = require("connect-flash");
+const passport = require("passport");
 const bodyparser = require("body-parser");
 // const MySQLStore = require("express-mysql-session")(session); // doesn't work with sequelize
 // const SessionStore = require("express-session-sequelize")(session.Store);
@@ -18,6 +19,7 @@ app.set("view engine", "hbs");
 app.engine("hbs", exphbs({ defaultLayout: "mainLayout.hbs" }));
 
 app.use(express.static(path.join(__dirname + "/public")));
+app.use(express.static(path.join(__dirname, "/public2")));
 
 app.use(bodyparser.urlencoded({ extended: true }));
 
@@ -43,11 +45,16 @@ app.use(
 );
 app.use(flash());
 
+// const passportInit=require('./auth/passport');
+let passportConfig = require("./auth/passport");
+passportConfig(passport);
+app.use(passport.initialize());
+app.use(passport.session());
+
 app.use((req, res, next) => {
   res.locals.error_msg = req.flash("error_msg");
   res.locals.success_msg = req.flash("success_msg");
   res.locals.user_id = req.session.user_id;
-  res.locals.username = req.session.username;
   next();
 });
 
