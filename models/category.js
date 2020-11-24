@@ -5,30 +5,23 @@ const sequelize = new Sequelize("dalipali", "root", "", {
 });
 
 module.exports = sequelize.define("Category", {
-  product_id: {
+  category_id: {
     type: Sequelize.INTEGER(11),
     allowNull: false,
     primaryKey: true,
     autoIncrement: true,
   },
-  product_name: {
+  category_name: {
     type: Sequelize.STRING,
     allowNull: false,
   },
-  image: {
+  position: {
     type: Sequelize.STRING,
     allowNull: false,
   },
-  price: {
-    type: Sequelize.FLOAT,
+  status: {
+    type: Sequelize.BOOLEAN,
     allowNull: false,
+    defaultValue: 1,
   },
-  weight: {
-    type: Sequelize.STRING,
-  },
-  unit: {
-    type: Sequelize.STRING,
-    allowNull: false,
-  },
-  category_id: {},
 });

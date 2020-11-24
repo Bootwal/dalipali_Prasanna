@@ -4,20 +4,6 @@ const User = require("../models/register");
 const bcrypt = require("bcrypt");
 
 module.exports = function (passport) {
-  passport.serializeUser(function (user, done) {
-    done(null, user.id);
-  });
-
-  passport.deserializeUser(function (id, done) {
-    User.findAll({ where: { id: id } })
-      .then((rows) => {
-        return done(rows);
-      })
-      .catch((error) => {
-        return done(error);
-      });
-  });
-
   passport.use(
     "local-signup",
     new LocalStrategy(
@@ -41,7 +27,6 @@ module.exports = function (passport) {
                 var email = req.body.email;
                 var password = hash;
                 var data = { fullname, email, password };
-                console.log(req.body);
                 User.create({
                   fullname: fullname,
                   email: email,
@@ -87,6 +72,7 @@ module.exports = function (passport) {
             } else {
               bcrypt.compare(password, rows[0].password, (error, result) => {
                 if (result) {
+                  // console.log(rows[0]);
                   req.session.user_id = rows[0].user_id;
                   req.session.username = rows[0].fullname;
                   return done(
@@ -110,4 +96,14 @@ module.exports = function (passport) {
       }
     )
   );
+
+  passport.serializeUser(function (user, done) {
+    done(null, user.user_id);
+  });
+
+  passport.deserializeUser(function (id, done) {
+    User.findOne({ where: { user_id: id } }).then((user) => {
+      return done(null, user);
+    });
+  });
 };
