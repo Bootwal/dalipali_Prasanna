@@ -1,1 +1,113 @@
-<h1>DASHBOARD</h1>
+
+
+                <!-- Page Content -->
+                <div class="content">
+                    <!-- Statistics -->
+                    <!-- CountTo ([data-toggle="countTo"] is initialized in Helpers.coreAppearCountTo()) -->
+                    <!-- For more info and examples you can check out https://github.com/mhuggins/jquery-countTo -->
+                    <div class="content-heading">
+                        <div class="dropdown float-right">
+                            
+                           
+                        </div>
+                        Statistics <small class="d-none d-sm-inline">Looking good!</small>
+                    </div>
+                    <div class="row gutters-tiny">
+                        {{!-- New orders --}}
+                        <div class="col-md-4 col-xl-3" style="max-width:20% !important;">
+                            <a class="block block-rounded block-transparent bg-gd-dusk getUrl" href="/newOrders/1" >
+                                <div class="block-content block-content-full block-sticky-options">
+                                    <div class="block-options">
+                                        <div class="block-options-item">
+                                            <i class="fa fa-archive text-white-op"></i>
+                                        </div>
+                                    </div>
+                                    <div class="py-20 text-center">
+                                        <div class="font-size-h2 font-w700 mb-0 text-white Order" id="newOrder" data-toggle="countTo" data-to="{{orderCount}}">0</div>
+                                        <div class="font-size-sm font-w600 text-uppercase text-white-op">New Orders</div>
+                                    </div>
+                                </div>
+                            </a>
+                        </div>
+                        <!-- Processing -->
+                        <div class="col-md-4 col-xl-3" style="max-width:20% !important;">
+                            <a class="block block-rounded block-transparent bg-gd-lake getUrl" href="/newOrders/2">
+                                <div class="block-content block-content-full block-sticky-options">
+                                    <div class="block-options">
+                                        <div class="block-options-item">
+                                            <i class="fa fa-spinner fa-spin text-white-op"></i>
+                                        </div>
+                                    </div>
+                                    <div class="py-20 text-center">
+                                        <div class="font-size-h2 font-w700 mb-0 text-white" id="processing" data-toggle="countTo" data-to="{{processCount}}">0</div>
+                                        <div class="font-size-sm font-w600 text-uppercase text-white-op">PROCESSING</div>
+                                    </div>
+                                </div>
+                            </a>
+                        </div>
+                        <!-- END processing -->
+
+                        <!-- Shipped-->
+                        <div class="col-md-4 col-xl-3" style="max-width:20% !important;">
+                            <a class="block block-rounded block-transparent bg-gd-leaf getUrl" href="/newOrders/3">
+                                <div class="block-content block-content-full block-sticky-options">
+                                    <div class="block-options">
+                                        <div class="block-options-item">
+                                            <i class="fa fa-share-square-o text-white-op"></i>
+                                        </div>
+                                    </div>
+                                    <div class="py-20 text-center">
+                                        <div class="font-size-h2 font-w700 mb-0 text-white" id="shipped"data-toggle="countTo" data-to="{{shippingCount}}">0</div>
+                                        <div class="font-size-sm font-w600 text-uppercase text-white-op">SHIPPED</div>
+                                    </div>
+                                </div>
+                            </a>
+                        </div>
+                        <!-- Shipped -->
+
+                        <!-- Delivered -->
+                        <div class="col-md-4 col-xl-3" style="max-width:20% !important;">
+                            <a class="block block-rounded block-transparent bg-gd-emerald getUrl" href="/newOrders/0">
+                                <div class="block-content block-content-full block-sticky-options">
+                                    <div class="block-options">
+                                        <div class="block-options-item">
+                                            <i class="fa fa-check text-white-op"></i>
+                                        </div>
+                                    </div>
+                                    <div class="py-20 text-center">
+                                        <div class="font-size-h2 font-w700 mb-0 text-white" id="delivered" data-toggle="countTo" data-to="{{deliveryCount}}">0</div>
+                                        <div class="font-size-sm font-w600 text-uppercase text-white-op">DELIVERED</div>
+                                    </div>
+                                </div>
+                            </a>
+                        </div>
+                        <!-- END delivered -->
+
+                        <!-- Pending -->
+                        <div class="col-md-4 col-xl-3" style="max-width:20% !important;">
+                            <a class="block block-rounded block-transparent bg-gd-sun getUrl" href="/newOrders/4" >
+                                <div class="block-content block-content-full block-sticky-options">
+                                    <div class="block-options">
+                                        <div class="block-options-item">
+                                            <i class="fa fa-spinner fa-spin text-white-op "></i>
+                                        </div>
+                                    </div>
+                                    <div class="py-20 text-center">
+                                        <div class="font-size-h2 font-w700 mb-0 text-white" id="pending" data-toggle="countTo" data-to="{{pendingCount}}">0</div>
+                                        <div class="font-size-sm font-w600 text-uppercase text-white-op">PENDING</div>
+                                    </div>
+                                </div>
+                            </a>
+                        </div>
+                        <!-- Pending -->
+                    </div>
+                    <!-- END Statistics -->
+
+                    <div id="tbody"><!-- Orders -->
+                    {{>orderPartials}}
+                    </div>
+                    <!-- END Orders -->
+                </div>
+                <!-- END Page Content -->
+
+            

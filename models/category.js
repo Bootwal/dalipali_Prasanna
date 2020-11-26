@@ -17,7 +17,7 @@ module.exports = sequelize.define("Category", {
   },
   position: {
     type: Sequelize.STRING,
-    allowNull: false,
+    defaultValue: null,
   },
   status: {
     type: Sequelize.BOOLEAN,

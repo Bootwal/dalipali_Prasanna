@@ -4,6 +4,28 @@ const User = require("../models/register");
 const bcrypt = require("bcrypt");
 
 module.exports = function (passport) {
+  passport.serializeUser(function (user, done) {
+    done(null, user.user_id);
+  });
+
+  passport.deserializeUser(function (id, done) {
+    User.findOne({ where: { user_id: id } }).then((user) => {
+      return done(null, user);
+    });
+  });
+
+  // passport.deserializeUser(function (id, done) {
+  //   User.findById(id)
+  //     .then(function (user) {
+  //       console.log("deserializing user:", user);
+  //       done(null, user);
+  //     })
+  //     .catch(function (err) {
+  //       if (err) {
+  //         throw err;
+  //       }
+  //     });
+  // });
   passport.use(
     "local-signup",
     new LocalStrategy(
@@ -13,6 +35,7 @@ module.exports = function (passport) {
         passReqToCallback: true,
       },
       function (req, email, password, done) {
+        console.log("ok");
         User.findAll({ where: { email: email } })
           .then((result) => {
             if (result.length > 0) {
@@ -22,6 +45,7 @@ module.exports = function (passport) {
                 req.flash("error_msg", "This email is already taken")
               );
             } else {
+              console.log(req.body);
               bcrypt.hash(req.body.password, 10, (error, hash) => {
                 var fullname = req.body.fullname;
                 var email = req.body.email;
@@ -96,14 +120,4 @@ module.exports = function (passport) {
       }
     )
   );
-
-  passport.serializeUser(function (user, done) {
-    done(null, user.user_id);
-  });
-
-  passport.deserializeUser(function (id, done) {
-    User.findOne({ where: { user_id: id } }).then((user) => {
-      return done(null, user);
-    });
-  });
 };

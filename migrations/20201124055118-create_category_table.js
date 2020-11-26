@@ -15,7 +15,7 @@ module.exports = {
       },
       position: {
         type: Sequelize.INTEGER(11),
-        allowNull: false,
+        defaultValue: null,
       },
       status: {
         type: Sequelize.BOOLEAN,

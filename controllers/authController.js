@@ -1,13 +1,12 @@
-const express = require("express");
-const app = express();
-let passport = require("passport");
+const passport = require("passport");
 const bcrypt = require("bcrypt");
 const User = require("../models/register");
 
 function authController() {
   const _getRedirectUrl = (req) => {
-    return req.user.role == 0 ? "/dashboard" : "/";
+    return req.user.role == 0 ? "/dashboard/dashboard" : "/";
   };
+
   return {
     login(req, res) {
       res.render("auth/login");
@@ -15,16 +14,16 @@ function authController() {
     postLogin(req, res, next) {
       passport.authenticate("local-signin", (err, user, info) => {
         if (err) {
-          req.flash("error", info.message);
+          req.flash("error_msg", "Something went wrong!!!");
           return next(err);
         }
         if (!user) {
-          req.flash("error", info.message);
-          return res.redirect("/login");
+          // req.flash("error_msg", "User Not found");
+          return res.redirect("/auth/login");
         }
         req.logIn(user, (err) => {
           if (err) {
-            req.flash("error", info.message);
+            req.flash("error_msg", "Something went wrong!!!");
             return next(err);
           }
           return res.redirect(_getRedirectUrl(req));
@@ -34,16 +33,18 @@ function authController() {
     register(req, res) {
       res.render("auth/register");
     },
-    postRegister(req, res) {
+    postRegister(req, res, next) {
+      console.log(req.body.email);
       passport.authenticate("local-signup", {
-        failureRedirect: "/register",
-        successRedirect: "/login",
-        session: true,
-      });
+        failureRedirect: "/auth/register",
+        successRedirect: "/auth/login",
+        failureFlash: true,
+        session: false,
+      })(req, res, next);
     },
     logout(req, res) {
-      req.logout();
-      return res.redirect("/login");
+      req.session.destroy();
+      return res.redirect("/auth/login");
     },
   };
 }
