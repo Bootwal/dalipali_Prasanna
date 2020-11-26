@@ -1,0 +1,216 @@
+{{#each products}}
+<div class="modal fade" id="orderModal{{@key}}" tabindex="-1" role="dialog" aria-labelledby="categoryModal"
+  aria-hidden="true">
+  <div class="modal-dialog modal-dialog-popin" role="document">
+    <div class="modal-content">
+      <div class="block block-themed block-transparent mb-0">
+        <div class="block-header bg-primary-dark">
+          <h3 class="block-title">List Of Product </h3>
+          <div class="block-options">
+            <button type="button" class="btn-block-option" data-dismiss="modal" aria-label="Close">
+              <i class="si si-close"></i>
+            </button>
+          </div>
+        </div>
+        <div class="model-body">
+          <div class="row">
+            <div class="w-auto mx-auto">
+              <b>OrderBy: &nbsp;</b>
+              {{#each this}}
+              {{Fullname}}
+              {{/each}} <br>
+
+              <b>Address: &nbsp;</b>
+              {{#each this}}
+              {{address}}
+              {{/each}} <br>
+              <b>Contact Number:</b>
+              {{#each this}}
+                {{Contact}}
+              {{/each}}
+            </div>
+
+          </div>
+
+
+
+
+
+
+
+
+
+          <div class="row mx-3 my-3">
+            <div class="col-md-3">ProductName</div>
+            <div class="col-md-3">Qty</div>
+            <div class="col-md-3">Rate</div>
+            <div class="col-md-3">Price</div>
+
+
+            {{#each this}}
+            {{#if product_name}}
+            <div class="col-md-3">{{product_name}} -({{weight}}{{unit}})</div>
+            <div class="col-md-3">{{qty}} </div>
+            <div class="col-md-3">{{rate}}</div>
+            <div class="col-md-3">{{price}}</div>
+
+
+            {{else}}
+            {{/if}}
+            {{/each}}
+
+            <div class="mt-2"></div>
+            <div class="col-md-3"></div>
+            <div class="col-md-3"> </div>
+            <div class="col-md-3">Total</div>
+            <div class="col-md-3">{{#each this}} {{sum}} {{/each}}</div>
+
+
+          </div>
+        </div>
+      </div>
+
+    </div>
+  </div>
+
+</div>
+{{/each}}
+
+<div class="content-heading">
+  <div>{{subTitle}}</div>
+</div>
+<div class="block block-rounded">
+  <div class="block-content bg-body-light">
+    <!-- Search -->
+    <form action="be_pages_ecom_orders.html" method="post" onsubmit="return false;">
+      <div class="form-group">
+        <div class="input-group">
+          <input type="text" class="form-control" placeholder="Search orders..">
+          <div class="input-group-append">
+            <button type="submit" class="btn btn-secondary">
+              <i class="fa fa-search"></i>
+            </button>
+          </div>
+        </div>
+      </div>
+    </form>
+    <!-- END Search -->
+  </div>
+  <div class="block-content">
+    <!-- Orders Table -->
+    <table class="table table-borderless table-striped">
+      <thead>
+        <tr>
+          <th style="width: 100px;">ID</th>
+          <th>Status</th>
+          <th class="d-none d-sm-table-cell">View Bill</th>
+          <th class="d-none d-sm-table-cell">Products</th>
+          <th>Customer</th>
+          <th class="d-none d-sm-table-cell"> Phone</th>
+          <th>Action</th>
+          <th class="text-right">Total</th>
+        </tr>
+      </thead>
+      <tbody>
+        {{#each result}}
+        <tr>
+          <td>
+            <a class="font-w600" href="#">ORD.{{order_id}}</a>
+          </td>
+          <td>
+            {{#ifEquals status 1}}
+            <span class="badge bg-gd-default text-white">New Order</span>
+            {{else}}
+            {{#ifEquals status 2}}
+            <span class="badge bg-gd-lake text-white">Processing</span>
+            {{else}}
+            {{#ifEquals status 3}}
+            <span class="badge bg-gd-leaf text-white">Shipped</span>
+            {{else}}
+            {{#ifEquals status 4}}
+            <span class="badge bg-gd-sun text-white">Pending</span>
+            {{else}}
+            <span class="badge bg-gd-lake text-white">Delivered</span>
+            {{/ifEquals}}
+            {{/ifEquals}}
+            {{/ifEquals}}
+            {{/ifEquals}}
+          </td>
+          <td class="d-none d-sm-table-cell">
+            <button type="button" class="btn btn-alt-info" data-toggle="modal"
+              data-target="#orderModal{{order_id}}">View</button>
+          </td>
+          <td class="d-none d-sm-table-cell">
+            <a href="javascript:void(0)"> {{products}}</a>
+          </td>
+          <td class="d-none d-sm-table-cell">
+            {{fullname}}
+          </td>
+          <td>
+            {{phone}}
+          </td>
+          <td>
+            {{#ifEquals status 1}}
+            <form class="d-inline orderEditStatus" action="/product/orderStatus/{{order_id}}">
+              <input type="hidden" name="status" value="2">
+              <input type="hidden" name="type" value="1">
+              <button type='submit' class="btn btn-sm bg-gd-lake text-white">Process</button>
+            </form>
+            <form class="d-inline orderEditStatus" action="/product/orderStatus/{{order_id}}">
+              <input type="hidden" name="status" value="4">
+              <input type="hidden" name="type" value="1">
+              <button type="submit" class=" btn btn-sm bg-gd-sun text-white">Pending</button>
+            </form>
+            {{else}}
+            {{#ifEquals status 2}}
+            <form class="d-inline orderEditStatus" action="/product/orderStatus/{{order_id}}">
+              <input type="hidden" name="status" value="3">
+              <input type="hidden" name="type" value="2">
+              <button class="btn btn-sm bg-gd-leaf text-white">Shipped</button>
+            </form>
+            <form class="d-inline orderEditStatus" action="/product/orderStatus/{{order_id}}">
+              <input type="hidden" name="status" value="5">
+              <input type="hidden" name="type" value="2">
+              <button class=" btn btn-sm bg-gd-cherry text-white">Cencel</button>
+            </form>
+            {{else}}
+            {{#ifEquals status 3}}
+            <form class="d-inline orderEditStatus" action="/product/orderStatus/{{order_id}}">
+              <input type="hidden" name="status" value="0">
+              <input type="hidden" name="type" value="3">
+              <button class="btn btn-sm bg-gd-emerald text-white">Delivered</button>
+            </form>
+            {{else}}
+            {{#ifEquals status 0}}
+            <button class="btn btn-sm bg-gd-emerald text-white">Delivered</button>
+            {{else}}
+            {{#ifEquals status 4}}
+            <form class="d-inline orderEditStatus" action="/product/orderStatus/{{order_id}}">
+              <input type="hidden" name="status" value="2">
+              <input type="hidden" name="type" value="4">
+              <button class="btn btn-sm bg-gd-leaf text-white">Process</button>
+            </form>
+            <form class="d-inline orderEditStatus" action="/product/orderStatus/{{order_id}}">
+              <input type="hidden" name="status" value="5">
+              <input type="hidden" name="type" value="4">
+              <button class=" btn btn-sm bg-gd-cherry text-white">Cencel</button>
+            </form>
+            {{else}}
+            {{/ifEquals}}
+            {{/ifEquals}}
+            {{/ifEquals}}
+            {{/ifEquals}}
+            {{/ifEquals}}
+          </td>
+          <td class="text-right">
+            <span class="text-black">RS {{total}}</span>
+          </td>
+        </tr>
+        {{/each}}
+      </tbody>
+    </table>
+
+
+    <!-- END Navigation -->
+  </div>
+</div>

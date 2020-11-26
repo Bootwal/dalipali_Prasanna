@@ -1,0 +1,70 @@
+<div class="modal fade" id="categoryModal" tabindex="-1" role="dialog" aria-labelledby="categoryModal"
+  aria-hidden="true">
+  <div class="modal-dialog modal-dialog-popin" role="document">
+    <div class="modal-content">
+      <div class="block block-themed block-transparent mb-0">
+        <div class="block-header bg-primary-dark">
+          <h3 class="block-title">Add Category</h3>
+          <div class="block-options">
+            <button type="button" class="btn-block-option" data-dismiss="modal" aria-label="Close">
+              <i class="si si-close"></i>
+            </button>
+          </div>
+        </div>
+        <div class="block-content">
+          <form class="card-body addCategory" action="/product/addCategory" method="post" id="bootstrapForm">
+            <div class="form-group">
+              <input type="text" class="form-control" id="formGroupExampleInput" placeholder="Vegetable" name="category_name"
+                required>
+            </div>
+            <div class="form-group">
+              <h5>ADD Brand</h5>
+              <button class="btn btn-sm btn-alt-info" id="addbrandbutton">+</button>
+              <div class="input_fields_wrap">
+                <div>
+                  <span class="d-inline-block my-1"> <input type="text" style="width:400px;" class="form-control"
+                      name="brandName[]" placeholder="Enter BrandName" required></span>
+                </div>
+
+              </div>
+            </div>
+            <div class="modal-footer">
+              <input type="submit" class="btn  btn-sm btn-info px-4" value="Category">
+
+            </div>
+
+          </form>
+        </div>
+      </div>
+
+    </div>
+  </div>
+</div>
+<div class="block">
+  <div class="block-header block-header-default">
+    <h3 class="block-title">Category</h3>
+    <div class="text-right mx-2">
+      <!-- Button trigger modal -->
+      <button type="button" class="btn btn-alt-info" data-toggle="modal" data-target="#categoryModal">Add
+        Category</button>
+    </div>
+  </div>
+  <div class="block-content">
+    <table class="table table-bordered table-vcenter" id="tblLocations">
+      <thead>
+        <tr>
+          <th class="text-center" style="width: 50px;">#</th>
+          <th>Name</th>
+          <th>Add SubCategory</th>
+          <th class="text-center" style="width: 100px;">Actions</th>
+        </tr>
+      </thead>
+      <tbody id="tbody">
+        {{>categoryPartials}}
+      </tbody>
+    </table>
+  </div>
+</div>
+
+
+

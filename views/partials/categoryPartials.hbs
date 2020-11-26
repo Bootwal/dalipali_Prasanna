@@ -1,0 +1,66 @@
+{{!-- {{#each result}}
+<div class="modal fade" id="subCategoryModel{{category_id}}" tabindex="-1" role="dialog" aria-labelledby="imageModel"
+  aria-hidden="true">
+
+  <div class="modal-dialog modal-dialog-popin" role="document">
+    <div class="modal-content">
+      <div class="block block-themed block-transparent mb-0">
+        <div class="block-header bg-primary-dark">
+          <h3 class="block-title">Add SubCategory of {{category_name}} </h3>
+          <div class="block-options">
+            <button type="button" class="btn-block-option" data-dismiss="modal" aria-label="Close">
+              <i class="si si-close"></i>
+            </button>
+          </div>
+        </div>
+        <div class="model-body">
+          <div class="m-5">
+            <div class="input_fields_wrap{{category_id}}">
+              <button class="add_field_button btn btn-sm btn-alt-info my-3" data-value='{{category_id}}'>+</button>
+              <div class="m-5"><input type="text" name="mytext[]"></div>
+            </div>
+          </div>
+
+        </div>
+      </div>
+
+    </div>
+  </div>
+
+</div> --}}
+
+{{#each result }}
+<tr id="{{category_id}}">
+  <th class="text-center" scope="row">{{inc @key}}</th>
+
+  <td ondblclick="document.getElementById('test{{@key}}').disabled=false;">
+    <form class="editingPlace" method="post" action="/product/editCategory/{{category_id}}">
+      <input type="text" class="placeName" name="categoryName" id="test{{@key}}" value="{{category_name}}"
+        disabled="disabled" style="border: 0; width:100%;">
+      <input type="submit" hidden />
+    </form>
+
+
+
+
+  </td>
+  <td scope="row">
+    {{!-- <button type="button" class="btn btn-sm btn-alt-info" data-toggle="modal"
+      data-target="#subCategoryModel{{category_id}}">+</button> --}}
+    <a class="btn btn-sm btn-alt-info" href="/addSubCategory/{{category_id}}">+</a>
+    <button class="btn btn-sm btn-alt-info" id="view">View brand</button>
+  </td>
+  <td class="text-center">
+    {{#ifEquals status 1}}
+    <form action="/product/categoryStatus/{{category_id}}" method="post" class="categoryForm">
+      <input type="hidden" name="status" value="0">
+      <input type="submit" class="btn btn-sm btn-alt-info" value="Active">
+    </form>
+    {{else}} <form action="/product/categoryStatus/{{category_id}}" method="post" class="categoryForm">
+      <input type="hidden" name="status" value="1">
+      <button type="submit" class="btn btn-sm btn-alt-danger"> Inactive</button>
+    </form>
+    {{/ifEquals}}
+  </td>
+</tr>
+{{/each}}
