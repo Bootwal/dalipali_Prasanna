@@ -10,6 +10,6 @@ router.get("/dashboard", isAdminLoggedIn, dashboardController().dashboard);
 //category route here
 router.get("/category", isAdminLoggedIn, dashboardController().category);
 
-router.get("addCategory", isAdminLoggedIn, dashboardController().addCategory);
+router.get("/addCategory", isAdminLoggedIn, dashboardController().addCategory);
 
 module.exports = router;
